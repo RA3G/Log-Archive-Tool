@@ -1,0 +1,13 @@
+#!/bin/bash
+# Make the archive folder inside the folder you pass
+sudo mkdir -p "$1/archive"
+
+# Print the folder paths
+echo "Log directory is: $1"
+echo "Archive folder will be: $1/archive"
+# Compress all .log files into archive
+tar -czf "$1/archive/logs_archive_$(date +%Y%m%d_%H%M%S).tar.gz" "$1"/*.log
+
+echo "Logs archived successfully!"
+# Log this operation
+echo "$(date '+%Y-%m-%d %H:%M:%S'): Archived $(ls $1/*.log | wc -l) logs into $(basename $ARCHIVE_FILE)" >> "$1/archive/archive.log"
